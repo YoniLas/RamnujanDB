@@ -1,0 +1,62 @@
+import mpmath
+from decimal import Decimal, getcontext
+import math
+from fractions import Fraction
+#mpmath.mp.dps = 100
+getcontext().prec = 500
+a = Fraction(1618033988749894848204586834365638117720309179805762862135448622705260462818902449707207204189391137484754088075386891752, 10**120)
+#a = Decimal(1.618033988749894848204586834365638117720309179805762862135448622705260462818902449707207204189391137484754088075386891752)
+pi = Fraction('3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067982148086513282306647093844609550582231725359408128481117450284102701938521105559644622948954930381964428810975665933446128475648233786783165271201909145648566923460348610454326648213393607260249141273724587006606315588174881520920962829254091715364367892590360011330530548820466521384146951941511609433057270365759591953092186117381932611793105118548074462379962749567351885752724891227938183011949129833673362440656643086')
+pi4 = 4/pi
+bla_pi = 4 / (3*pi - 8)
+
+def caclute_pi(n):
+	tmp = Decimal('1.0');
+
+	while n > 0:
+		tmp = 2 + ((n*2-1)**2/tmp)
+		n-=1
+
+	return tmp - 1
+
+def bla(n):
+	tmp = Fraction('1.0')
+
+	while n > 0:
+		tmp = n*3 - n* (2*n - 1) / tmp
+		n -= 1
+
+	return tmp
+
+def blabla(n):
+	per = []
+	for i in range(3, n):
+		per.append(int(math.log10(abs(bla_pi - bla(i)))))
+		#per.append(bla(i))
+	return per
+
+def b(n):
+	tmp = Fraction('1.0')
+	while n >= 0:
+		n -= 1
+		tmp = 1 + (1 / tmp)
+	return tmp
+
+def c(n):
+	per = []
+	for i in range(1, n):
+		per.append(int(math.log10(abs(a - b(i)))))
+	return per
+
+def d(n):
+	per = []
+	for i in range(1, n):
+		per.append(int(math.log10(abs(b(i + 1) - b(i)))))
+	return per
+	
+
+def e(n):
+	per = []
+	for i in range(1, n):
+		per.append(int(math.log10(abs(pi4 - caclute_pi(i)))))
+	return per
